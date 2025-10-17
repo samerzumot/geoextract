@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoExtract - Geological Report Data Extraction</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1f77b4 0%, #2e8b57 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #1f77b4;
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            color: #1f77b4;
+            margin-top: 0;
+        }
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #1f77b4 0%, #2e8b57 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ GeoExtract</h1>
+            <p>Open-Source Geological Report Data Extraction System</p>
+            <div class="badge">🚀 Deployed on Vercel</div>
+        </div>
+        
+        <div class="content">
+            <h2>Welcome to GeoExtract</h2>
+            <p>GeoExtract is a powerful open-source system for extracting geological data from PDF reports using advanced AI and OCR technologies.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📄 Document Processing</h3>
+                    <p>Upload PDF geological reports and extract structured data using advanced OCR and LLM technologies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🗺️ Interactive Mapping</h3>
+                    <p>Visualize extracted locations on interactive maps with drill holes, sample sites, and geological features.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📊 Data Analysis</h3>
+                    <p>Analyze geological data with charts, correlation matrices, and statistical visualizations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>⚙️ AI-Powered Extraction</h3>
+                    <p>Leverage multiple LLM providers (Ollama, OpenAI, Anthropic) for intelligent data extraction.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔍 Advanced OCR</h3>
+                    <p>Support for multiple OCR engines (Paddle, Tesseract) with confidence scoring and language detection.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📤 Multiple Export Formats</h3>
+                    <p>Export results in GeoJSON, CSV, GeoPackage, and JSON-LD formats for further analysis.</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>Get Started with GeoExtract</h2>
+                <p>Deploy your own instance or use the hosted version to start extracting geological data from your reports.</p>
+                <a href="https://github.com/samerzumot/geo-explore" class="btn">📚 View Documentation</a>
+                <a href="https://github.com/samerzumot/geo-explore" class="btn">🚀 Deploy Now</a>
+            </div>
+            
+            <h2>Features</h2>
+            <ul>
+                <li><strong>Multi-format Support:</strong> Process PDF documents with various layouts and formats</li>
+                <li><strong>AI Integration:</strong> Use state-of-the-art language models for intelligent extraction</li>
+                <li><strong>Geospatial Output:</strong> Generate GeoJSON files for GIS applications</li>
+                <li><strong>Batch Processing:</strong> Handle multiple documents simultaneously</li>
+                <li><strong>Quality Control:</strong> Confidence scoring and validation for extracted data</li>
+                <li><strong>Web Interface:</strong> User-friendly Streamlit-based interface</li>
+                <li><strong>API Access:</strong> RESTful API for programmatic access</li>
+                <li><strong>Docker Support:</strong> Easy deployment with containerization</li>
+            </ul>
+            
+            <h2>Technology Stack</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0;">
+                <span class="badge">Python</span>
+                <span class="badge">Streamlit</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">Pandas</span>
+                <span class="badge">Plotly</span>
+                <span class="badge">Folium</span>
+                <span class="badge">Pydantic</span>
+                <span class="badge">OCR</span>
+                <span class="badge">LLM</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Vercel</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>GeoExtract</strong> - Open-Source Geological Report Data Extraction System</p>
+            <p>Built with ❤️ using Python, Streamlit, and modern AI technologies</p>
+            <p>🚀 <strong>Deployed on Vercel</strong> | 🌐 <strong>Global CDN</strong> | 🔒 <strong>HTTPS Secure</strong></p>
+        </div>
+    </div>
+</body>
+</html>

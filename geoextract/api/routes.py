@@ -6,8 +6,10 @@ import shutil
 import tempfile
 import time
 import uuid
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from statistics import mean
 from typing import Callable, Dict, List, Optional
 import zipfile
 
@@ -19,6 +21,7 @@ from geoextract.config import settings
 from geoextract.export.csv_writer import CSVWriter
 from geoextract.export.geojson_writer import GeoJSONWriter
 from geoextract.extraction.entity_extractor import EntityExtractor
+from geoextract.extraction.llm_client import LLMClient
 from geoextract.ocr.ocr_manager import OCRManager
 from geoextract.preprocessing.image_clean import ImageCleaner
 from geoextract.preprocessing.pdf_handler import PDFHandler
