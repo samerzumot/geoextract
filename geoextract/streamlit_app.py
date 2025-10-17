@@ -1,6 +1,6 @@
 """
-GeoExtract - Streamlit App for Vercel Deployment
-This is the actual Streamlit application from localhost:8502
+GeoExtract - Main Streamlit Application
+Optimized for Streamlit Cloud deployment
 """
 
 import streamlit as st
@@ -47,12 +47,23 @@ st.markdown("""
         color: #dc3545;
         font-weight: bold;
     }
+    .streamlit-badge {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: #ff4b4b;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # Title
 st.markdown('<h1 class="main-header">🗺️ GeoExtract</h1>', unsafe_allow_html=True)
 st.markdown("### Open-Source Geological Report Data Extraction System")
+st.markdown("☁️ **Deployed on Streamlit Cloud**")
 
 # Sidebar
 st.sidebar.title("Configuration")
@@ -179,7 +190,7 @@ with tab1:
                         st.metric("Avg Confidence", f"{df_results['confidence'].mean():.2f}")
                     
                     # Display results table
-                    st.dataframe(df_results, width='stretch')
+                    st.dataframe(df_results, use_container_width=True)
                     
                     # Download results
                     if "geojson" in output_format:
@@ -283,7 +294,7 @@ with tab3:
     st.subheader("Element Distribution")
     fig = px.bar(df, x="Element", y="Value", color="Unit", 
                  title="Assay Results by Element")
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
     
     # Sample analysis
     st.subheader("Sample Analysis")
@@ -303,11 +314,11 @@ with tab3:
                 title="Element Correlation Matrix",
                 color_continuous_scale="RdBu"
             )
-            st.plotly_chart(fig_corr, width='stretch')
+            st.plotly_chart(fig_corr, use_container_width=True)
     
     # Data table
     st.subheader("Raw Data")
-    st.dataframe(df, width='stretch')
+    st.dataframe(df, use_container_width=True)
 
 with tab4:
     st.header("Settings & Configuration")
@@ -327,7 +338,7 @@ with tab4:
     }
     
     config_df = pd.DataFrame(config_data)
-    st.dataframe(config_df, width='stretch')
+    st.dataframe(config_df, use_container_width=True)
     
     # Export configuration
     config_json = {
@@ -359,6 +370,7 @@ with tab4:
         "Python Version": sys.version,
         "Platform": platform.platform(),
         "Streamlit Version": st.__version__,
+        "Deployment": "Streamlit Cloud"
     }
     
     for key, value in sys_info.items():
@@ -368,5 +380,9 @@ with tab4:
 st.markdown("---")
 st.markdown(
     "**GeoExtract** - Open-Source Geological Report Data Extraction System | "
-    "Built with ❤️ using Python, Streamlit, and modern AI technologies"
+    "Built with ❤️ using Python, Streamlit, and modern AI technologies | "
+    "☁️ **Deployed on Streamlit Cloud**"
 )
+
+# Streamlit badge
+st.markdown('<div class="streamlit-badge">Powered by Streamlit</div>', unsafe_allow_html=True)
