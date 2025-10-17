@@ -33,6 +33,7 @@ router = APIRouter()
 
 class ProcessingRequest(BaseModel):
     """Request model for document processing."""
+
     llm_provider: Optional[str] = "ollama"
     llm_model: Optional[str] = "llama3.1:8b"
     ocr_engine: Optional[str] = "paddle"
@@ -63,25 +64,23 @@ async def process_document(
     debug: bool = Form(False)
 ):
     """Process a single PDF document."""
-    
-    # Validate file type
-    if not file.filename.lower().endswith('.pdf'):
+
+    if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="File must be a PDF")
-    
-    # Generate job ID
+
     job_id = str(uuid.uuid4())
-    
-    # Initialize job status
-    job_store.create_job(job_id, {
-        "job_id": job_id,
-        "status": "pending",
-        "progress": 0.0,
-        "message": "Job created",
-        "result_path": None,
-        "error": None
-    })
-    
-    # Start background processing
+    job_store.create_job(
+        job_id,
+        {
+            "job_id": job_id,
+            "status": "pending",
+            "progress": 0.0,
+            "message": "Job created",
+            "result_path": None,
+            "error": None,
+        },
+    )
+
     temp_pdf_path, cleanup_callback = await _persist_upload(file)
 
     output_formats = [fmt.strip() for fmt in output_format.split(",") if fmt.strip()]
@@ -99,15 +98,10 @@ async def process_document(
         confidence_threshold,
         language,
         output_formats,
-        debug
+        debug,
     )
-    
-    return JobStatus(
-        job_id=job_id,
-        status="pending",
-        progress=0.0,
-        message="Job created"
-    )
+
+    return JobStatus(job_id=job_id, status="pending", progress=0.0, message="Job created")
 
 @router.post("/process/batch", response_model=JobStatus)
 async def process_batch(
@@ -119,33 +113,31 @@ async def process_batch(
     confidence_threshold: float = Form(0.8),
     language: str = Form("en"),
     output_format: str = Form("geojson"),
-    debug: bool = Form(False)
+    debug: bool = Form(False),
 ):
     """Process multiple PDF documents."""
-    
-    # Validate files
-    for file in files:
-        if not file.filename.lower().endswith('.pdf'):
-            raise HTTPException(status_code=400, detail=f"File {file.filename} must be a PDF")
-    
-    # Generate job ID
+
+    for upload in files:
+        if not upload.filename.lower().endswith(".pdf"):
+            raise HTTPException(status_code=400, detail=f"File {upload.filename} must be a PDF")
+
     job_id = str(uuid.uuid4())
-    
-    # Initialize job status
-    job_store.create_job(job_id, {
-        "job_id": job_id,
-        "status": "pending",
-        "progress": 0.0,
-        "message": "Batch job created",
-        "result_path": None,
-        "error": None
-    })
-    
-    # Start background processing
+    job_store.create_job(
+        job_id,
+        {
+            "job_id": job_id,
+            "status": "pending",
+            "progress": 0.0,
+            "message": "Batch job created",
+            "result_path": None,
+            "error": None,
+        },
+    )
+
     persisted_files: List[Path] = []
     cleanup_callbacks: List[Callable[[], None]] = []
-    for file in files:
-        temp_path, cleanup_callback = await _persist_upload(file)
+    for upload in files:
+        temp_path, cleanup_callback = await _persist_upload(upload)
         persisted_files.append(temp_path)
         cleanup_callbacks.append(cleanup_callback)
 
@@ -164,15 +156,10 @@ async def process_batch(
         confidence_threshold,
         language,
         output_formats,
-        debug
+        debug,
     )
-    
-    return JobStatus(
-        job_id=job_id,
-        status="pending",
-        progress=0.0,
-        message="Batch job created"
-    )
+
+    return JobStatus(job_id=job_id, status="pending", progress=0.0, message="Batch job created")
 
 def process_document_background(
     job_id: str,
