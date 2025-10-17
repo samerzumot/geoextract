@@ -91,3 +91,4 @@ git push origin main
 ## 🎯 **Your GeoExtract app is ready for cloud deployment!**
 
 Just push to GitHub and deploy on Streamlit Cloud - your full interactive geological data extraction system will be live on the web!
+

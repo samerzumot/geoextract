@@ -201,3 +201,4 @@ The GeoExtract web application is deployed and accessible with all features:
 - Interactive mapping
 - Data analysis tools
 - Configuration options
+

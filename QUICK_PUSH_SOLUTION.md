@@ -60,3 +60,4 @@ GitHub authentication is failing because it needs your credentials.
 ## 🎉 **Your GeoExtract App is Ready!**
 
 All files are committed and ready. Just push to GitHub using any method above, then deploy on Streamlit Cloud. Your full interactive geological data extraction system will be live!
+

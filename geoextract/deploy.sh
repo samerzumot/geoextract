@@ -105,3 +105,4 @@ echo "================================="
 
 # Start Streamlit
 $PYTHON_CMD -m streamlit run ui/streamlit_app.py --server.port $AVAILABLE_PORT --server.address 0.0.0.0
+

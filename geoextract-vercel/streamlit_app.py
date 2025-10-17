@@ -370,3 +370,4 @@ st.markdown(
     "**GeoExtract** - Open-Source Geological Report Data Extraction System | "
     "Built with ❤️ using Python, Streamlit, and modern AI technologies"
 )
+

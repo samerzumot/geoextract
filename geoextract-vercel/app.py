@@ -127,3 +127,4 @@ st.markdown(
     "Built with ❤️ using Python, Streamlit, and modern AI technologies | "
     "🚀 **Deployed on Vercel**"
 )
+

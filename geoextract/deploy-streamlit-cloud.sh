@@ -76,3 +76,4 @@ print_status "Your app will be available at: https://[app-name]-[hash].streamlit
 echo ""
 print_info "Alternative: Use Railway or Heroku for deployment"
 echo "See STREAMLIT_CLOUD_DEPLOYMENT.md for detailed instructions"
+
