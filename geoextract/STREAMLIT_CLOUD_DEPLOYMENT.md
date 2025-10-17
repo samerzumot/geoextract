@@ -96,4 +96,3 @@ git push heroku main
 - ❌ Complex dependency issues
 - ✅ Good for static sites
 - ✅ Fast global CDN
-

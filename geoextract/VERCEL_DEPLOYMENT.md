@@ -159,4 +159,3 @@ After successful deployment, you'll get:
    - Monitor performance metrics
 
 ## 🎉 Your GeoExtract app will be live at: `https://your-app.vercel.app`
-

@@ -386,4 +386,3 @@ st.markdown(
 
 # Vercel badge
 st.markdown('<div class="vercel-badge">Powered by Vercel</div>', unsafe_allow_html=True)
-
