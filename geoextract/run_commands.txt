@@ -1,0 +1,31 @@
+# Commands to run GeoExtract Web Application
+# Copy and paste these commands one by one in your terminal:
+
+# 1. Navigate to the project directory
+cd /Users/zumot/Desktop/ree/geoextract
+
+# 2. Check Python installation
+python3 --version
+# OR if python3 doesn't work:
+python --version
+
+# 3. Install required packages
+pip3 install streamlit fastapi uvicorn pandas plotly folium streamlit-folium pydantic pydantic-settings
+# OR if pip3 doesn't work:
+pip install streamlit fastapi uvicorn pandas plotly folium streamlit-folium pydantic pydantic-settings
+
+# 4. Make the setup script executable
+chmod +x setup_and_run.sh
+
+# 5. Run the complete setup and launch script
+./setup_and_run.sh
+
+# OR run manually:
+# 6. Start the Streamlit application
+streamlit run ui/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+
+# 7. If port 8501 is busy, try:
+streamlit run ui/streamlit_app.py --server.port 8502 --server.address 0.0.0.0
+
+# 8. Open your browser and go to:
+# http://localhost:8501 (or 8502 if you used that port)
