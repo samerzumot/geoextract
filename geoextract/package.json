@@ -1,0 +1,24 @@
+{
+  "name": "geoextract",
+  "version": "1.0.0",
+  "description": "Open-Source Geological Report Data Extraction System",
+  "main": "streamlit_app_vercel.py",
+  "scripts": {
+    "dev": "streamlit run streamlit_app_vercel.py",
+    "build": "echo 'Build complete'",
+    "start": "streamlit run streamlit_app_vercel.py"
+  },
+  "keywords": [
+    "geological",
+    "data-extraction",
+    "streamlit",
+    "ai",
+    "ocr",
+    "llm"
+  ],
+  "author": "GeoExtract Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
