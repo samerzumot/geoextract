@@ -1,17 +1,15 @@
 """FastAPI main application."""
 
 import logging
-from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, FileResponse
 from pathlib import Path
-import uuid
-import json
-from typing import List, Optional
-import asyncio
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from geoextract.config import settings
 from geoextract.api.routes import router
+from geoextract.api import job_store
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -38,9 +36,6 @@ app.add_middleware(
 # Include routers
 app.include_router(router, prefix="/api/v1")
 
-# Global job storage (in production, use Redis or database)
-job_storage = {}
-
 @app.get("/")
 async def root():
     """Root endpoint."""
@@ -61,18 +56,17 @@ async def health_check():
 @app.get("/jobs/{job_id}")
 async def get_job_status(job_id: str):
     """Get job status."""
-    if job_id not in job_storage:
+    job = job_store.get_job(job_id)
+    if job is None:
         raise HTTPException(status_code=404, detail="Job not found")
-    
-    return job_storage[job_id]
+    return job
 
 @app.get("/jobs/{job_id}/result")
 async def get_job_result(job_id: str):
     """Get job result."""
-    if job_id not in job_storage:
+    job = job_store.get_job(job_id)
+    if job is None:
         raise HTTPException(status_code=404, detail="Job not found")
-    
-    job = job_storage[job_id]
     if job["status"] != "completed":
         raise HTTPException(status_code=400, detail="Job not completed")
     

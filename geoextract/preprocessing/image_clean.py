@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter
 
-from config import settings
+from geoextract.config import settings
 
 logger = logging.getLogger(__name__)
 

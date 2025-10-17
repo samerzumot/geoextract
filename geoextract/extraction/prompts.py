@@ -4,7 +4,7 @@ import json
 from typing import Dict, Any, List
 from pathlib import Path
 
-from config import settings
+from geoextract.config import settings
 
 class PromptManager:
     """Manages prompts for geological data extraction."""

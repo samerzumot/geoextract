@@ -4,9 +4,9 @@ import logging
 from typing import List, Dict, Any, Optional
 import numpy as np
 
-from config import settings
-from .paddle_engine import PaddleOCREngine
-from .tesseract_engine import TesseractEngine
+from geoextract.config import settings
+from geoextract.ocr.paddle_engine import PaddleOCREngine
+from geoextract.ocr.tesseract_engine import TesseractEngine
 
 logger = logging.getLogger(__name__)
 

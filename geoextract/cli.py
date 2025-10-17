@@ -12,14 +12,14 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 from rich.panel import Panel
 
-from config import settings
-from preprocessing.pdf_handler import PDFHandler
-from preprocessing.image_clean import ImageCleaner
-from ocr.ocr_manager import OCRManager
-from extraction.entity_extractor import EntityExtractor
-from export.geojson_writer import GeoJSONWriter
-from export.csv_writer import CSVWriter
-from schemas.document import GeologicalDocument, DocumentMetadata, ProcessingStats
+from geoextract.config import settings
+from geoextract.preprocessing.pdf_handler import PDFHandler
+from geoextract.preprocessing.image_clean import ImageCleaner
+from geoextract.ocr.ocr_manager import OCRManager
+from geoextract.extraction.entity_extractor import EntityExtractor
+from geoextract.export.geojson_writer import GeoJSONWriter
+from geoextract.export.csv_writer import CSVWriter
+from geoextract.schemas.document import GeologicalDocument, DocumentMetadata, ProcessingStats
 
 # Initialize Typer app
 app = typer.Typer(

@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
-from schemas.document import GeologicalDocument
-from schemas.geological import Location, Sample, GeologicalObservation, AssayResult
+from geoextract.schemas.document import GeologicalDocument
+from geoextract.schemas.geological import Location, Sample, GeologicalObservation, AssayResult
 
 logger = logging.getLogger(__name__)
 

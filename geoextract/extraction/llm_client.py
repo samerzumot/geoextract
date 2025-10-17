@@ -10,7 +10,7 @@ import ollama
 import openai
 from openai import AsyncOpenAI
 
-from config import settings
+from geoextract.config import settings
 
 logger = logging.getLogger(__name__)
 

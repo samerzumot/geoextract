@@ -12,7 +12,7 @@ except ImportError:
     pytesseract = None
     Image = None
 
-from config import settings
+from geoextract.config import settings
 
 logger = logging.getLogger(__name__)
 

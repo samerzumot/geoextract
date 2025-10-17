@@ -5,7 +5,7 @@ import logging
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime
 
-from schemas.geological import Coordinate, AssayResult, Sample, Location
+from geoextract.schemas.geological import Coordinate, AssayResult, Sample, Location
 
 logger = logging.getLogger(__name__)
 

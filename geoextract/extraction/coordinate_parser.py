@@ -1,11 +1,11 @@
 """Coordinate parsing and conversion utilities."""
 
-import re
 import logging
-from typing import Dict, Any, Optional, List, Tuple
 import math
+import re
+from typing import Any, Dict, List, Optional, Tuple
 
-from schemas.geological import Coordinate
+from geoextract.schemas.geological import Coordinate
 
 logger = logging.getLogger(__name__)
 
