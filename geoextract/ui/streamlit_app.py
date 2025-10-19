@@ -110,6 +110,12 @@ output_format = st.sidebar.multiselect(
 tab1, tab2, tab3, tab4 = st.tabs(["📄 Upload & Process", "🗺️ Map View", "📊 Data Analysis", "⚙️ Settings"])
 
 with tab1:
+    st.markdown("""
+    **GeoExtract** is an AI-powered geological data extraction system designed for geologists, mining engineers, and exploration professionals. 
+    It automatically processes geological PDF reports to extract coordinates, sample data, and geological features using advanced OCR and LLM technology. 
+    The system generates interactive maps and structured datasets for geological analysis and exploration planning. 
+    Perfect for mining companies, geological surveys, and research institutions working with geological documentation.
+    """)
     st.header("Document Processing")
     
     # File upload
@@ -224,9 +230,9 @@ with tab2:
     col1, col2 = st.columns([3, 1])
     
     with col2:
-        map_center_lat = st.number_input("Center Latitude", value=37.7749, step=0.1)
-        map_center_lon = st.number_input("Center Longitude", value=-122.4194, step=0.1)
-        map_zoom = st.slider("Zoom Level", min_value=1, max_value=20, value=10)
+        map_center_lat = st.number_input("Center Latitude", value=36.0, step=0.1)
+        map_center_lon = st.number_input("Center Longitude", value=-115.0, step=0.1)
+        map_zoom = st.slider("Zoom Level", min_value=1, max_value=20, value=7)
     
     with col1:
         # Create map
@@ -236,32 +242,89 @@ with tab2:
             tiles="OpenStreetMap"
         )
         
-        # Add sample markers (in real implementation, use actual data)
-        sample_locations = [
-            {"lat": 37.7749, "lon": -122.4194, "name": "Location 1", "type": "drill_hole"},
-            {"lat": 37.7849, "lon": -122.4094, "name": "Location 2", "type": "sample_site"},
-            {"lat": 37.7649, "lon": -122.4294, "name": "Location 3", "type": "mine"},
+        # Realistic rare earth element deposits near Nevada border
+        ree_deposits = [
+            # Mountain Pass, California - Largest REE deposit in US
+            {"lat": 35.4667, "lon": -115.5333, "name": "Mountain Pass Mine", "type": "active_mine", 
+             "description": "Largest REE deposit in US, operated by MP Materials", "elements": "LREE, Ce, La, Nd"},
+            
+            # Music Valley, California - Southeast Mojave Desert
+            {"lat": 33.8333, "lon": -115.6667, "name": "Music Valley", "type": "prospect", 
+             "description": "REE deposits in alkaline Proterozoic rocks", "elements": "LREE, HREE"},
+            
+            # Pinto Mountains, California
+            {"lat": 33.9167, "lon": -115.5833, "name": "Pinto Mountains", "type": "prospect", 
+             "description": "Alkaline rock-hosted REE mineralization", "elements": "LREE, Th"},
+            
+            # Halleck Creek, Wyoming - World-class deposit
+            {"lat": 42.0833, "lon": -105.0833, "name": "Halleck Creek", "type": "prospect", 
+             "description": "2.34B metric tons - potentially world's largest REE deposit", "elements": "LREE, HREE"},
+            
+            # Round Top Mountain, Texas (near border region)
+            {"lat": 30.3333, "lon": -103.6667, "name": "Round Top Mountain", "type": "prospect", 
+             "description": "Peralkaline granite-hosted REE deposit", "elements": "HREE, Y, Zr"},
+            
+            # Bear Lodge, Wyoming
+            {"lat": 44.4167, "lon": -104.2500, "name": "Bear Lodge", "type": "prospect", 
+             "description": "Carbonatite-hosted REE mineralization", "elements": "LREE, Nd, Pr"},
+            
+            # Bokan Mountain, Alaska (for reference)
+            {"lat": 55.9167, "lon": -133.1667, "name": "Bokan Mountain", "type": "prospect", 
+             "description": "Peralkaline granite with HREE enrichment", "elements": "HREE, Y, Dy"},
         ]
         
-        for loc in sample_locations:
+        for deposit in ree_deposits:
+            # Choose icon and color based on deposit type
+            if deposit["type"] == "active_mine":
+                icon_color = "red"
+                icon_name = "home"
+            elif deposit["type"] == "prospect":
+                icon_color = "blue"
+                icon_name = "star"
+            else:
+                icon_color = "green"
+                icon_name = "info-sign"
+            
+            # Create detailed popup with deposit information
+            popup_html = f"""
+            <div style="width: 250px;">
+                <h4>{deposit['name']}</h4>
+                <p><strong>Type:</strong> {deposit['type'].replace('_', ' ').title()}</p>
+                <p><strong>Description:</strong> {deposit['description']}</p>
+                <p><strong>Elements:</strong> {deposit['elements']}</p>
+            </div>
+            """
+            
             folium.Marker(
-                [loc["lat"], loc["lon"]],
-                popup=f"{loc['name']} ({loc['type']})",
-                icon=folium.Icon(color="blue", icon="info-sign")
+                [deposit["lat"], deposit["lon"]],
+                popup=folium.Popup(popup_html, max_width=300),
+                icon=folium.Icon(color=icon_color, icon=icon_name, prefix="fa")
             ).add_to(m)
         
         # Display map
         st_folium(m, width=700, height=500)
     
     # Map statistics
-    st.subheader("Map Statistics")
-    col1, col2, col3 = st.columns(3)
+    st.subheader("REE Deposit Statistics")
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("Total Locations", len(sample_locations))
+        st.metric("Total Deposits", len(ree_deposits))
     with col2:
-        st.metric("Drill Holes", len([l for l in sample_locations if l["type"] == "drill_hole"]))
+        st.metric("Active Mines", len([d for d in ree_deposits if d["type"] == "active_mine"]))
     with col3:
-        st.metric("Sample Sites", len([l for l in sample_locations if l["type"] == "sample_site"]))
+        st.metric("Prospects", len([d for d in ree_deposits if d["type"] == "prospect"]))
+    with col4:
+        st.metric("LREE Deposits", len([d for d in ree_deposits if "LREE" in d["elements"]]))
+    
+    # Additional information
+    st.subheader("Key REE Deposits")
+    st.info("""
+    **Mountain Pass Mine** (California): The largest REE deposit in the United States, currently operated by MP Materials.
+    
+    **Halleck Creek** (Wyoming): Potentially the world's largest REE deposit with 2.34 billion metric tons of reserves.
+    
+    **Music Valley & Pinto Mountains** (California): Part of the 130km alkaline rock belt in the Southeast Mojave Desert.
+    """)
 
 with tab3:
     st.header("Data Analysis")
